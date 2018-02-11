@@ -1,0 +1,29 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "d3": "^4.13.0",
+    "lodash": "^4.17.5",
+    "moment": "^2.20.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "build-css": "node-sass src/scss/index.scss src/index.css",
+    "watch-css": "npm run build-css && node-sass -w src/scss -o src/",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all --parallel watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "flexboxgrid": "^6.3.1",
+    "node-sass": "^4.7.2",
+    "node-sass-watcher": "^0.5.1",
+    "npm-run-all": "^4.1.2"
+  }
+}
