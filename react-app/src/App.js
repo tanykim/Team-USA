@@ -57,7 +57,7 @@ class App extends Component {
             {years.map(y => <option
               key={y.year}
               value={y.year}>
-              {y.year} {y.location} ({y.year % 4 === 0 ? 'Winter' : 'Summer'}
+              {y.year} {y.location} ({y.year % 4 === 0 ? 'Summer' : 'Winter'}
               {` `}/ {data[y.year].sports.length} Sports)
             </option>)}
           </select>
