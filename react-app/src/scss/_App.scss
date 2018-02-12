@@ -10,10 +10,6 @@ body {
   padding: 0;
 }
 
-h1, h2, h3 {
-  font-weight: 700;
-}
-
 /* layout */
 .olympic-border {
   width: 100%;
@@ -32,7 +28,6 @@ h1, h2, h3 {
 }
 .olympic-border, .olympic-border-footer {
   display: flex;
-  flex-direction: row;
   div {
     width: 20%;
   }
@@ -57,73 +52,78 @@ h1, h2, h3 {
   top: 6px;
   width: 100%;
 }
-header {
+
+.header {
   text-align: center;
-  width: 100%;
-  font-family: $sans-serif;
   .title {
     font-size: $huge;
-    font-weight: 700;
-    margin-top: 40px;
-    padding-bottom: 10px;
+    font-family: $display;
+    margin-top: 32px;
+    padding-bottom: 8px;
+    letter-spacing: 0.1em;
   }
-  .desc, .source {
+  .desc {
     color: $grey;
     a {
       color: $grey;
     }
   }
   .source {
-    margin-top: 10px;
-    font-size: $small;
+    background-color: $oc-gray-1;
+    margin-top: 32px;
+    padding: 16px 0;
+    select {
+      margin-left: 8px;
+    }
   }
 }
-.loading {
-  margin-top: 60px;
-  color: $grey;
-  font-size: $large;
-  text-align: center;
-  letter-spacing: 8px;
+
+select {
+  border: 1px solid $black;
+  font-size: $small;
+  font-family: inherit;
 }
+
 %count-shared {
   display: inline-block;
-  width: 20px;
-  height: 16px;
-  margin: 2px 4px -3px 2px;
+  padding: 1px 4px;
+  color: $white;
+  border-radius: 4px;
 }
 
 .options {
-  display: flex;
-  flex-wrap: row wrap;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px solid $lightGrey;
-  border-bottom: 1px solid $lightGrey;
   .sort-by, .show {
-    display: inline-block;
-    font-size: $small;
     .title {
       font-family: $sans-serif;
-      font-size: $normal;
-      margin-bottom: 10px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
   }
   .sort-by {
-    padding-right: 30px;
+    padding: 20px;
+    text-align: left;
+    select {
+      width: 100%;
+    }
   }
   .show {
-    padding-left: 30px;
-    border-left: 1px solid $lightGrey;
+    padding-top: 0px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    .elm {
+     font-size: $small;
+      display: flex;
+      align-items: center;
+      input {
+        margin-right: 8px;
+      }
+      &:not(:first-child) {
+        margin-top: 4px;
+      }
+    }
   }
-  .sort-by select {
-    border: 1px solid $black;
-    font-size: $small;
-    font-family: inherit;
-  }
- .count-block {
+  .count-block {
     @extend %count-shared;
   }
   .count-all {
@@ -145,31 +145,41 @@ header {
   .count-returned {
     background-color: $returned;
     @extend %count-shared;
-  }
-  .count {
-    color: $grey;
-    font-size: $small;
+    color: $black;
   }
 }
-.main {
-  width: 960px;
-  margin: 0 auto;
-  .vis {
-    margin-top: 20px;
+
+.vis-wrapper {
+  svg {
+    border-top: 1px solid $lightGrey;
   }
+  letter-spacing: 0.02em;
+  overflow: scroll;
 }
 .footer {
   .desc {
-    font-family: $sans-serif;
     background-color: $black;
-    margin-top: 20px;
+    margin-top: 12px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: $small;
     text-align: center;
-    color: #FFFFFF;
+    color: $oc-gray-5;
     a {
-      color: #FFFFFF;
+      color: white;
     }
+  }
+  .elm {
+    margin-right: 16px;
+    padding-right: 16px;
+    border-right: 1px solid $grey;
+  }
+}
+
+/* from small screen, show the border in Option area*/
+@media only screen and (min-width: 48em) {
+  .show {
+    border-left: 1px solid $lightGrey;
+    padding-top: 20px !important;
   }
 }

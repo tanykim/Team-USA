@@ -27,7 +27,7 @@
     stroke-wieght: 1 ;
 }
 .stroke-black {
-    stroke: black;
+    stroke: $black;
 }
 .stroke-lightGrey {
     stroke: $lightGrey;
@@ -36,7 +36,7 @@
     stroke: $lightestGrey;
 }
 .stroke-sorted {
-    stroke : $violet;
+    stroke : $sorted;
 }
 
 .fill-grey {
@@ -46,11 +46,11 @@
     fill: $lightGrey;
 }
 .fill-sorted {
-    fill: $violet;
+    fill: $sorted;
 }
 
 .bar-all {
-    fill : black;
+    fill : $black;
 }
 .bar-rookies {
     fill: $rookies;

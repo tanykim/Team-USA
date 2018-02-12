@@ -4,7 +4,8 @@ import _ from 'lodash';
 
 //layout
 const divWidth = 970;
-const margin = { top: 20, right: 10, bottom: 20, left: 140, gap: 16 };
+const margin = { right: 16, bottom: 20, left: 132, gap: 28 };
+margin.top = margin.gap + 20;
 const dim = { w: divWidth - margin.left - margin.right };
 const gHeight = 50;
 const x = d3.scaleLinear().range([0, dim.w]);
@@ -13,14 +14,14 @@ const y = d3.scaleLinear().range([0, gHeight]);
 class Sports extends Component {
 
   _drawHistogram = (bins, id, option, startAge) => {
-    const g = d3.select(`.js-vis-g-${id}`);
+    const g = d3.select(`.js-g-hist-${id}`);
     let data;
     if (option === 'all') {
       data = bins.all.map(d => [d, 0]);
     } else {
       data = bins.all.map((d, i) => [bins[option][i], d - bins[option][i]]);
     }
-    const remained = option === 'women' ? 'men' : 'returned';
+    const remained = option === 'men' ? 'women' : 'returned';
     for (let i in data) {
       const d = data[i];
       const xPos = x(startAge + +i) + 0.5;
@@ -58,11 +59,35 @@ class Sports extends Component {
     } = data;
 
     //sports name
-    g.append('text')
-      .attr('x', -9)
-      .attr('y', gHeight / 2)
-      .text(name)
-      .attr('class', 'pos-end v-central js-name');
+    let sportName = name;
+    let displineName = '';
+    const displines = ['Speedskating', 'Skiing'];
+    for (let dis of displines) {
+      if (name.indexOf(dis) > -1) {
+        displineName = name.split(dis)[0].trim();
+        sportName = dis;
+        break;
+      }
+    }
+    if (displineName !== '') {
+      g.append('text')
+        .attr('x', -9)
+        .attr('y', gHeight / 2 - 9)
+        .text(displineName)
+        .attr('class', 'pos-end v-central js-name');
+      g.append('text')
+        .attr('x', -9)
+        .attr('y', gHeight / 2 + 9)
+        .text(sportName)
+        .attr('class', 'pos-end v-central js-name size-small fill-grey');
+    } else {
+      g.append('text')
+        .attr('x', -9)
+        .attr('y', gHeight / 2)
+        .text(sportName)
+        .attr('class', 'pos-end v-central js-name');
+    }
+    //horizontal line
     g.append('line')
       .attr('x2', dim.w)
       .attr('y1', gHeight)
@@ -74,29 +99,30 @@ class Sports extends Component {
 
     //draw athletes count
     g.append('text')
-      .attr('x', -9)
-      .attr('y', gHeight - margin.gap)
-      .attr('dy', 14)
+      .attr('x', 4)
+      .attr('y', gHeight / 2)
       .text(count + ' athletes')
       .style('display', 'none')
-      .attr('class', 'pos-end size-small fill-sorted web-font js-highlight js-athletes_count');
+      .attr('class', 'v-central size-small fill-sorted web-font js-highlight js-athletes_count');
 
     //draw median age
+    const yPos = -margin.gap / 2;
     g.append('line')
         .attr('x1', x(median))
         .attr('x2', x(median))
-        .attr('y2', gHeight / 2)
+        .attr('y1', -margin.gap)
+        .attr('y2', gHeight)
         .style('display', 'none')
         .attr('class', 'stroke-sorted js-highlight js-median_age');
     g.append('circle')
         .attr('cx', x(median))
-        .attr('cy', gHeight / 4)
+        .attr('cy', yPos)
         .attr('r', 4)
         .style('display', 'none')
         .attr('class', 'fill-sorted js-highlight js-median_age');
     g.append('text')
         .attr('x', x(median) + 6)
-        .attr('y', gHeight / 4)
+        .attr('y', yPos)
         .text(this._getAgeText(median))
         .style('display', 'none')
         .attr('class', 'v-central size-small fill-sorted web-font js-highlight js-median_age');
@@ -105,20 +131,25 @@ class Sports extends Component {
     g.append('line')
         .attr('x1', x(ageRange[0]))
         .attr('x2', x(ageRange[1]))
+        .attr('y1', yPos)
+        .attr('y2', yPos)
         .style('display', 'none')
         .attr('class', 'stroke-sorted js-highlight js-age_diff');
     g.append('circle')
         .attr('cx', x(ageRange[0]))
+        .attr('cy', yPos)
         .attr('r', 4)
         .style('display', 'none')
         .attr('class', 'fill-sorted js-highlight js-age_diff');
     g.append('circle')
         .attr('cx', x(ageRange[1]))
+        .attr('cy', yPos)
         .attr('r', 4)
         .style('display', 'none')
         .attr('class', 'fill-sorted js-highlight js-age_diff');
     g.append('text')
         .attr('x', x((ageRange[1] + ageRange[0]) / 2))
+        .attr('y', yPos)
         .attr('dy', 4)
         .text(this._getAgeText(ageRange[1] - ageRange[0]))
         .style('display', 'none')
@@ -167,9 +198,11 @@ class Sports extends Component {
 
   }
 
-  componentDidMount() {
+  _drawVis = (data) => {
 
-    const {sports, max_age, max_hist_value} = this.props.data;
+    d3.select('#vis').html('');
+
+    const {sports, max_age, max_hist_value} = data;
 
     //draw vis
     dim.h = sports.length * (gHeight + margin.gap);
@@ -180,9 +213,8 @@ class Sports extends Component {
 
     //get age range by 10s
     const minAge = 10;
-    const maxAge = Math.ceil(max_age / 10) * 10;
+    const maxAge = Math.ceil(max_age / 5) * 5;
     x.domain([minAge, maxAge]);
-    //max number of athletes per sport
     y.domain([0, max_hist_value]);
 
     //draw fixed vertial lines (y axis) in every 5 years, crossing all sports
@@ -218,7 +250,9 @@ class Sports extends Component {
       .attr('transform', (d, i) =>
         `translate(${margin.left}, ${margin.top + i * (gHeight + margin.gap)})`
       )
-      .attr('class', (d, i) => `js-vis-g js-vis-g-${i}`);
+      .attr('class', (d, i) => `js-vis-g js-vis-g-${i}`)
+      .append('g')
+      .attr('class', (d, i) => `js-g-hist-${i}`);
 
     //draw vis of each sport
     for (let i in sports) {
@@ -226,8 +260,14 @@ class Sports extends Component {
     }
   }
 
+  componentDidMount() {
+    this._drawVis(this.props.data);
+  }
+
   componentWillReceiveProps(nextProps) {
-    if (this.props.category !== nextProps.category) {
+    if (this.props.year !== nextProps.year) {
+      this._drawVis(nextProps.data);
+    } else if (this.props.category !== nextProps.category) {
       this._showCategory(nextProps.data.sports, nextProps.category);
     } else if (this.props.sortBy !== nextProps.sortBy) {
       this._sortVis(nextProps.data.sports, nextProps.sortBy);
@@ -235,7 +275,7 @@ class Sports extends Component {
   }
 
   render() {
-    return (<div id='vis' className='vis'></div>);
+    return (<div id="vis" className="vis-wrapper"></div>);
   }
 }
 

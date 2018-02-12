@@ -1,16 +1,19 @@
+@import '../../node_modules/open-color/open-color.scss';
+
 /* colors */
-$grey: #777777;
-$lightGrey: #D3D3D3;
-$lightestGrey: #efefef;
+$grey: $oc-gray-6;
+$lightGrey: $oc-gray-4;
+$lightestGrey: $oc-gray-3;
+$white: #fff;
 
 /* olympic colors - http://www.colourlovers.com/palette/149866/Olympic_Flag */
-$blue: #00298C;
-$yellow: #FFEF08;
-$black: #000000;
-$red: #DE1818;
-$green: #087B39;
+$blue: $oc-blue-9;
+$yellow: $oc-yellow-4;
+$black: $oc-gray-9;
+$red: $oc-red-8;
+$green: $oc-teal-8;
 
-$violet: #8900C7;
+$sorted: $oc-grape-8;
 
 $women: $red;
 $men: $blue;

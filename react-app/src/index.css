@@ -1,6 +1,6 @@
 /* colors */
 /* olympic colors - http://www.colourlovers.com/palette/149866/Olympic_Flag */
-@import url("https://fonts.googleapis.com/css?family=Cabin:500,700|Lusitana:400,700");
+@import url("https://fonts.googleapis.com/css?family=Cabin:400,700|Lusitana:400,700|Monoton");
 /* size */
 .pos-middle {
   text-anchor: middle; }
@@ -15,55 +15,55 @@
   alignment-baseline: hanging; }
 
 .size-tiny {
-  font-size: 8pt; }
+  font-size: 10px; }
 
 .size-small {
-  font-size: 10pt; }
+  font-size: 14px; }
 
 .size-normal {
-  font-size: 12pt; }
+  font-size: 16px; }
 
 .size-large {
-  font-size: 16pt; }
+  font-size: 24px; }
 
 .stroke-1 {
   stroke-wieght: 1; }
 
 .stroke-black {
-  stroke: black; }
+  stroke: #212529; }
 
 .stroke-lightGrey {
-  stroke: #D3D3D3; }
+  stroke: #ced4da; }
 
 .stroke-lightestGrey {
-  stroke: #efefef; }
+  stroke: #dee2e6; }
 
 .stroke-sorted {
-  stroke: #8900C7; }
+  stroke: #9c36b5; }
 
 .fill-grey {
-  fill: #777777; }
+  fill: #868e96; }
 
 .fill-lightGrey {
-  fill: #D3D3D3; }
+  fill: #ced4da; }
 
 .fill-sorted {
-  fill: #8900C7; }
+  fill: #9c36b5; }
 
 .bar-all {
-  fill: black; }
+  fill: #212529; }
 
 .bar-rookies {
-  fill: #087B39; }
+  fill: #099268; }
 
 .bar-returned {
-  fill: #FFEF08; }
+  fill: #ffd43b; }
 
 .bar-women {
-  fill: #DE1818; }
+  fill: #e03131; }
 
 .bar-men {
-  fill: #00298C; }
+  fill: #1864ab; }
 
 .web-font {
   font-family: "Lusitana", Georgia, "Times New Roman", serif; }
@@ -74,9 +74,6 @@ body {
   font-family: "Cabin", system, -apple-system, "Helvetica Neue", helvetica, arial, sans-serif;
   margin: 0;
   padding: 0; }
-
-h1, h2, h3 {
-  font-weight: 700; }
 
 /* layout */
 .olympic-border {
@@ -92,110 +89,120 @@ h1, h2, h3 {
   min-height: 4px; }
 
 .olympic-border, .olympic-border-footer {
-  display: flex;
-  flex-direction: row; }
+  display: flex; }
   .olympic-border div, .olympic-border-footer div {
     width: 20%; }
   .olympic-border .blue, .olympic-border-footer .blue {
-    background-color: #00298C; }
+    background-color: #1864ab; }
   .olympic-border .red, .olympic-border-footer .red {
-    background-color: #DE1818; }
+    background-color: #e03131; }
   .olympic-border .green, .olympic-border-footer .green {
-    background-color: #087B39; }
+    background-color: #099268; }
   .olympic-border .yellow, .olympic-border-footer .yellow {
-    background-color: #FFEF08; }
+    background-color: #ffd43b; }
   .olympic-border .black, .olympic-border-footer .black {
-    background-color: #000000; }
+    background-color: #212529; }
 
 .container {
   position: absolute;
   top: 6px;
   width: 100%; }
 
-header {
-  text-align: center;
-  width: 100%;
-  font-family: "Cabin", system, -apple-system, "Helvetica Neue", helvetica, arial, sans-serif; }
-  header .title {
-    font-size: 32pt;
-    font-weight: 700;
-    margin-top: 40px;
-    padding-bottom: 10px; }
-  header .desc, header .source {
-    color: #777777; }
-    header .desc a, header .source a {
-      color: #777777; }
-  header .source {
-    margin-top: 10px;
-    font-size: 10pt; }
+.header {
+  text-align: center; }
+  .header .title {
+    font-size: 42px;
+    font-family: "Monoton";
+    margin-top: 32px;
+    padding-bottom: 8px;
+    letter-spacing: 0.1em; }
+  .header .desc {
+    color: #868e96; }
+    .header .desc a {
+      color: #868e96; }
+  .header .source {
+    background-color: #f1f3f5;
+    margin-top: 32px;
+    padding: 16px 0; }
+    .header .source select {
+      margin-left: 8px; }
 
-.loading {
-  margin-top: 60px;
-  color: #777777;
-  font-size: 16pt;
-  text-align: center;
-  letter-spacing: 8px; }
+select {
+  border: 1px solid #212529;
+  font-size: 14px;
+  font-family: inherit; }
 
 .options .count-block, .options .count-all, .options .count-women, .options .count-men, .options .count-rookies, .options .count-returned {
   display: inline-block;
-  width: 20px;
-  height: 16px;
-  margin: 2px 4px -3px 2px; }
+  padding: 1px 4px;
+  color: #fff;
+  border-radius: 4px; }
 
-.options {
-  display: flex;
-  flex-wrap: row wrap;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 40px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-top: 1px solid #D3D3D3;
-  border-bottom: 1px solid #D3D3D3; }
-  .options .sort-by, .options .show {
-    display: inline-block;
-    font-size: 10pt; }
-    .options .sort-by .title, .options .show .title {
-      font-family: "Cabin", system, -apple-system, "Helvetica Neue", helvetica, arial, sans-serif;
-      font-size: 12pt;
-      margin-bottom: 10px; }
-  .options .sort-by {
-    padding-right: 30px; }
-  .options .show {
-    padding-left: 30px;
-    border-left: 1px solid #D3D3D3; }
+.options .sort-by .title, .options .show .title {
+  font-family: "Cabin", system, -apple-system, "Helvetica Neue", helvetica, arial, sans-serif;
+  font-weight: 700;
+  margin-bottom: 8px; }
+
+.options .sort-by {
+  padding: 20px;
+  text-align: left; }
   .options .sort-by select {
-    border: 1px solid #000000;
-    font-size: 10pt;
-    font-family: inherit; }
-  .options .count-all {
-    background-color: #000000; }
-  .options .count-women {
-    background-color: #DE1818; }
-  .options .count-men {
-    background-color: #00298C; }
-  .options .count-rookies {
-    background-color: #087B39; }
-  .options .count-returned {
-    background-color: #FFEF08; }
-  .options .count {
-    color: #777777;
-    font-size: 10pt; }
+    width: 100%; }
 
-.main {
-  width: 960px;
-  margin: 0 auto; }
-  .main .vis {
-    margin-top: 20px; }
+.options .show {
+  padding-top: 0px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px; }
+  .options .show .elm {
+    font-size: 14px;
+    display: flex;
+    align-items: center; }
+    .options .show .elm input {
+      margin-right: 8px; }
+    .options .show .elm:not(:first-child) {
+      margin-top: 4px; }
+
+.options .count-all {
+  background-color: #212529; }
+
+.options .count-women {
+  background-color: #e03131; }
+
+.options .count-men {
+  background-color: #1864ab; }
+
+.options .count-rookies {
+  background-color: #099268; }
+
+.options .count-returned {
+  background-color: #ffd43b;
+  color: #212529; }
+
+.vis-wrapper {
+  letter-spacing: 0.02em;
+  overflow: scroll; }
+  .vis-wrapper svg {
+    border-top: 1px solid #ced4da; }
 
 .footer .desc {
-  font-family: "Cabin", system, -apple-system, "Helvetica Neue", helvetica, arial, sans-serif;
-  background-color: #000000;
-  margin-top: 20px;
+  background-color: #212529;
+  margin-top: 12px;
   padding-top: 20px;
   padding-bottom: 20px;
-  font-size: 10pt;
+  font-size: 14px;
   text-align: center;
-  color: #FFFFFF; }
+  color: #adb5bd; }
   .footer .desc a {
-    color: #FFFFFF; }
+    color: white; }
+
+.footer .elm {
+  margin-right: 16px;
+  padding-right: 16px;
+  border-right: 1px solid #868e96; }
+
+/* from small screen, show the border in Option area*/
+@media only screen and (min-width: 48em) {
+  .show {
+    border-left: 1px solid #ced4da;
+    padding-top: 20px !important; } }
